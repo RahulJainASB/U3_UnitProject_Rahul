@@ -28,25 +28,29 @@ void setup()
   box2d.createWorld();
   box2d.setGravity(0, -100);
   box2d.setContinuousPhysics(true);
-  
-  
+
+  goombaImg = loadImage("Goomba.png");
+  marioImg = loadImage("Mario.png");
+
+
   coins        = new Coins();
   flag         = new Flag();
   goomba       = new Goomba();
-  goombaImg = loadImage("Goomba.png");
   ground       = new Ground();
-  mario        = new Mario();
-  marioImg = loadImage("Mario.png");
+  mario        = new  Mario(width/2, height/2, marioImg, true);
   score        = new Score();
-  
+
+  mario = new Mario (width/2, height/2, marioImg, true);
 }
 
 void draw()
 {
-  coins.draw();
-  flag.draw();
-  goomba.draw();
-  ground.draw();
-  mario.draw();
-  score.draw();
+  mario.Draw();
+  mario.Update();
+  // coins.draw();
+  // flag.draw();
+  //goomba.draw();
+  //ground.draw();
+  // mario.draw();
+  // score.draw();
 }
