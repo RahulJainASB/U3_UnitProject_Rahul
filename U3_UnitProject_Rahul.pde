@@ -60,7 +60,8 @@ void setup() {
 }
 
 
-void draw() {
+void draw() 
+{
   background(50, 128, 255);
 
   // We must always step through time!
@@ -71,7 +72,8 @@ void draw() {
     coins.add(new Coin(random(width), 20, 6));
   }
 
-  for (Boundary wall : boundaries) {      // Show the boundaries!
+  for (Boundary wall : boundaries) 
+  {      // Show the boundaries!
     wall.display();
   }
 
@@ -79,7 +81,8 @@ void draw() {
   mario.Draw();                        // Show Mario
 
   // Show the coins
-  for (int i = coins.size()-1; i >= 0; i--) {
+  for (int i = coins.size()-1; i >= 0; i--) 
+  {
     Coin p = coins.get(i);
     p.display();
     // Coins that leave the screen, we delete them
@@ -93,22 +96,29 @@ void draw() {
 }
 
 
-void keyPressed() {
+void keyPressed() 
+{
 
   if ( key == CODED) {                  // check if key is CODED. This is for special keys
-    if ( keyCode == LEFT ) {            // if left key is pressed, move left
+    if ( keyCode == LEFT ) 
+    {            // if left key is pressed, move left
       mario.applyHorzForce(false);
-    } else if ( keyCode == RIGHT ) {    // if right key is pressed, move right
+    } else if ( keyCode == RIGHT ) 
+    {    // if right key is pressed, move right
       mario.applyHorzForce(true);
-    } else if ( keyCode == UP ) {    // if up key is pressed, move up
+    } else if ( keyCode == UP ) 
+    {    // if up key is pressed, move up
       mario.applyVertForce(true);
-    } else if ( keyCode == DOWN ) {    // if down key is pressed, move down
+    } else if ( keyCode == DOWN ) 
+    {    // if down key is pressed, move down
       mario.applyVertForce(false);
     }
   }
-  if (key == ' ') {
+  if (key == ' ') 
+  {
   }
-  if (key == 'q') {
+  if (key == 'q') 
+  {
     exit();
   }
 }
@@ -116,7 +126,8 @@ void keyPressed() {
 
 
 // Collision event functions!
-void beginContact(Contact cp) {
+void beginContact(Contact cp) 
+{
 
 
   // Get both shapes
@@ -132,7 +143,8 @@ void beginContact(Contact cp) {
 
 
   // Mario hits the coin
-  if (o1.getClass() == Mario.class && o2.getClass() == Coin.class) {
+  if (o1.getClass() == Mario.class && o2.getClass() == Coin.class) 
+  {
     scoreboard.score++;
     Coin p2 = (Coin) o2;
     p2.delete();
@@ -141,36 +153,43 @@ void beginContact(Contact cp) {
 
   // Mario hits a wall
   if ( (o1.getClass() == Mario.class    && o2.getClass() == Boundary.class) ||
-    (o1.getClass() == Boundary.class && o2.getClass() == Mario.class   ) ) {
+    (o1.getClass() == Boundary.class && o2.getClass() == Mario.class   ) ) 
+  {
     scoreboard.lives--;
   }
 
 
   // Mario hits Goomba
-  if ( (o1.getClass() == Mario.class  && o2.getClass() == Goomba.class)  ) {
+  if ( (o1.getClass() == Mario.class  && o2.getClass() == Goomba.class)  ) 
+  {
     scoreboard.lives--;    
     Goomba g = (Goomba) o2;
     g.delete();
   }
-  if (  (o1.getClass() == Goomba.class && o2.getClass() == Mario.class ) ) {
+
+  if (  (o1.getClass() == Goomba.class && o2.getClass() == Mario.class ) ) 
+  {
     scoreboard.lives--;    
     Goomba g = (Goomba) o1;
     g.delete();
   }
 
   // Coin hits the wall
-  if (o1.getClass() == Coin.class && o2.getClass() == Boundary.class) {
+  if (o1.getClass() == Coin.class && o2.getClass() == Boundary.class) 
+  {
     Coin p1 = (Coin) o1;
     p1.delete();
   }
-  if (o1.getClass() == Boundary.class && o2.getClass() == Coin.class) {
+  if (o1.getClass() == Boundary.class && o2.getClass() == Coin.class) 
+  {
     Coin p1 = (Coin) o2;
     p1.delete();
   }
 }
 
 // Objects stop touching each other
-void endContact(Contact cp) {
+void endContact(Contact cp) 
+{
 }
 
 // When the mouse is released
