@@ -94,7 +94,7 @@ class Mario extends Entity
       //print(": Right ;; ");
 
       //Vec2 force = new Vec2( 5000000, 100000);
-      Vec2 force = new Vec2( 3500, 0);
+      Vec2 force = new Vec2( 4000, 0);
       super._body.applyForce(force, super._body.getWorldCenter());
 
       /*      
@@ -116,7 +116,7 @@ class Mario extends Entity
     } else {
       //print(": Left ;; ");
       //Vec2 force = new Vec2( -1*G, 0);
-      Vec2 force = new Vec2( -1 * 3550, 0);
+      Vec2 force = new Vec2( -1 * 4000, 0);
       super._body.applyForce(force, super._body.getWorldCenter());
     }
   }
@@ -126,7 +126,7 @@ class Mario extends Entity
     if ( direction == true)
     {
       //print(": Up  ||  ");
-      float G = 150000; // Strength of force 
+      float G = 120000; // Strength of force 
       Vec2 force = new Vec2(0, G);
       super._body.applyForce(force, super._body.getWorldCenter());
     } else {
