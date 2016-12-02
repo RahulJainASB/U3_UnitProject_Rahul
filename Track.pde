@@ -1,6 +1,7 @@
 // A track class that moves to the left with time
 
-class Track {
+class Track 
+{
 
   // A boundary is a simple rectangle with x,y,width,and height, It moves to the left at constant velocity
   float x;
@@ -13,7 +14,8 @@ class Track {
   // But we also have to make a body for box2d to know about it
   Body b;
 
-  Track(float x_,float y_, float w_, float h_) {
+  Track(float x_,float y_, float w_, float h_) 
+  {
     x = x_;
     y = y_;
     w = w_;

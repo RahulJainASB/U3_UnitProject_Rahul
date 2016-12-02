@@ -3,7 +3,8 @@
 // This class builds new tracks and manages them
 //
 
-class Track_Builder {
+class Track_Builder 
+{
 
   // A boundary is a simple rectangle with x,y,width,and height, It moves to the left at constant velocity
   float                track_height;
@@ -12,14 +13,15 @@ class Track_Builder {
   ArrayList<Goomba>    goombas;         // An ArrayList
 
 
-  Track_Builder() {
+  Track_Builder() 
+  {
     goombaImg       = loadImage("Goomba_s.png");
     tracks          = new ArrayList<Track>();
     goombas         = new ArrayList<Goomba>();
     track_height    =  40;
 
     // Create 3 tracks to begin with. Rest will be added dynamically
-    tracks.add(new Track(  width/4, height-25, (width/2),     track_height));
+    tracks.add(new Track(  width/4, height-25, (width/2), track_height));
     tracks.add(new Track(  3*(width/4), height-75, (width/4), track_height));
     tracks.add(new Track(  5*(width/4), height-30, (width/2), track_height));
 
@@ -36,11 +38,13 @@ class Track_Builder {
     killGoomba();
 
 
-    for (Track t : tracks) {
+    for (Track t : tracks) 
+    {
       t.display();
     }
 
-    for (Goomba g : goombas) {      // Show the Goomba!
+    for (Goomba g : goombas) 
+    {      // Show the Goomba!
       //if( ((g.GetX() - (g.GetWidth()/2)) <= width) && ((g.GetX() + (g.GetWidth()/2)) > 0) ) {
       //print("Showing Goomba  ");
       g.Draw();
@@ -54,7 +58,8 @@ class Track_Builder {
     // If so, create a new track
     if ( tracks.size() > 1) {
       Track last_track = tracks.get(  (tracks.size() - 1));
-      if ( (last_track.getLeftX() < width) && (last_track.getRightX() > width) ) {
+      if ( (last_track.getLeftX() < width) && (last_track.getRightX() > width) ) 
+      {
         // last track has entered the game. Create another track.
         float w_ = getNewTrackWidth(last_track);
         float x_ = getNewTrackX(last_track, w_);
@@ -68,7 +73,8 @@ class Track_Builder {
   }
 
 
-  void addGoomba(Track onTrack) {
+  void addGoomba(Track onTrack) 
+  {
     PImage img = loadImage("Goomba_s.png");
 
     Goomba goomba = new Goomba( onTrack.x, (onTrack.y - (onTrack.h/2)), img, true);
@@ -85,9 +91,11 @@ class Track_Builder {
 
     // Check if the right edge of the track in the array has gone beyond the left wall, kill that track 
     Iterator<Track> it = tracks.iterator();
-    while (it.hasNext() ) {
+    while (it.hasNext() ) 
+    {
       Track t = it.next();
-      if ( t.getRightX() < 0 ) {
+      if ( t.getRightX() < 0 ) 
+      {
         box2d.destroyBody(t.b);    //This object can now be safely deleted from an ArrayList
         it.remove();
       }
@@ -99,7 +107,8 @@ class Track_Builder {
     Iterator<Goomba> git = goombas.iterator();
     while (git.hasNext() ) {
       Goomba g = git.next();
-      if ( (g.GetX() < 0 ) || (g.delete == true)) {
+      if ( (g.GetX() < 0 ) || (g.delete == true)) 
+      {
         g.CleanUpDeadObject();
         git.remove();
       }

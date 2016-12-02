@@ -2,7 +2,8 @@
 // Draws the coins
 
 
-class Coin {
+class Coin 
+{
 
   // We need to keep track of a Body and a radius
   Body body;
@@ -12,7 +13,8 @@ class Coin {
 
   boolean delete = false;
 
-  Coin(float x, float y, float r_) {
+  Coin(float x, float y, float r_) 
+  {
     r = r_;
     // This function puts the particle in the Box2d world
     makeBody(x, y, r);
@@ -21,26 +23,31 @@ class Coin {
   }
 
   // This function removes the particle from the box2d world
-  void killBody() {
+  void killBody() 
+  {
     box2d.destroyBody(body);
   }
 
-  void delete() {
+  void delete() 
+  {
     delete = true;
   }
 
   // Change color when hit
-  void change() {
+  void change() 
+  {
     col = color(255, 0, 0);
   }
 
   // Is the particle ready for deletion?
   // Is the particle ready for deletion?
-  boolean done() {
+  boolean done() 
+  {
     // Let's find the screen position of the particle
     Vec2 pos = box2d.getBodyPixelCoord(body);
     // Is it off the bottom of the screen?
-    if (pos.y > height+r*2 || delete) {
+    if (pos.y > height+r*2 || delete) 
+    {
       killBody();
       return true;
     }
@@ -62,7 +69,8 @@ class Coin {
   }
 
   // Here's our function that adds the particle to the Box2D world
-  void makeBody(float x, float y, float r) {
+  void makeBody(float x, float y, float r) 
+  {
     // Define a body
     BodyDef bd = new BodyDef();
     // Set its position

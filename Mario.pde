@@ -1,10 +1,10 @@
 class Mario extends Entity
 {
-//  private boolean _keyLeft;
-//  private boolean _keyRight;
-//  private boolean _keyJump;
+  //  private boolean _keyLeft;
+  //  private boolean _keyRight;
+  //  private boolean _keyJump;
   private PVector _moveSpeed;
-//  private int     _jumpStrength;
+  //  private int     _jumpStrength;
 
   Mario(float x, float y, PImage img, boolean isActive)
   {
@@ -13,9 +13,9 @@ class Mario extends Entity
     _moveSpeed = new PVector(50, 0);
 
     super._body.setUserData(this);
-    
+
     //This is not a great method of doing jumping
-//    _jumpStrength = 20000;
+    //    _jumpStrength = 20000;
     // but it works for now.
   }
 
@@ -27,8 +27,7 @@ class Mario extends Entity
     {
       Vec2 force = new Vec2( G, 0);
       super._body.applyForce(force, super._body.getWorldCenter());
-    }
-    else 
+    } else 
     {
       Vec2 force = new Vec2( -1 * G, 0);
       super._body.applyForce(force, super._body.getWorldCenter());

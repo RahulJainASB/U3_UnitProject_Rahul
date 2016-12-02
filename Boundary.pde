@@ -1,17 +1,19 @@
 // A fixed boundary class
 
-class Boundary {
+class Boundary 
+{
 
   // A boundary is a simple rectangle with x,y,width,and height
   float x;
   float y;
   float w;
   float h;
-  
+
   // But we also have to make a body for box2d to know about it
   Body b;
 
-  Boundary(float x_,float y_, float w_, float h_) {
+  Boundary(float x_, float y_, float w_, float h_) 
+  {
     x = x_;
     y = y_;
     w = w_;
@@ -29,20 +31,20 @@ class Boundary {
     // Create the body
     BodyDef bd = new BodyDef();
     bd.type = BodyType.STATIC;
-    bd.position.set(box2d.coordPixelsToWorld(x,y));
+    bd.position.set(box2d.coordPixelsToWorld(x, y));
     b = box2d.createBody(bd);
-    
+
     // Attached the shape to the body using a Fixture
-    b.createFixture(sd,1);
+    b.createFixture(sd, 1);
     b.setUserData(this);
   }
 
   // Draw the boundary, if it were at an angle we'd have to do something fancier
-  void display() {
+  void display() 
+  {
     fill(0);
     stroke(0);
     rectMode(CENTER);
-    rect(x,y,w,h);
+    rect(x, y, w, h);
   }
-
 } // end of Class
