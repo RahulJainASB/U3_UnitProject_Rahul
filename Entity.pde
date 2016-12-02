@@ -1,16 +1,21 @@
 class Entity
 {
-  private float _x;
-  private float _y;
-  private PImage _img;
-  private String _type;
-  private boolean _isActive;
-  private Body _body;
+  private float    _x;
+  private float    _y;
+  int              _imgH;
+  int              _imgW;
+  private PImage   _img;
+  private String   _type;
+  private boolean  _isActive;
+  private Body     _body;
   
   Entity()
   {
     _x = 0;
     _y = 0;
+    _imgH = 0;
+    _imgW = 0;
+    
     _img  = null;
     _type = "Unknown Entity"; 
     _isActive = false;
@@ -23,23 +28,20 @@ class Entity
     _img  = img;
     _type = type;
     _isActive = isActive;
+    _imgH = _img.height;        //This is the scalar size of the box that we're going to create
+    _imgW = _img.width;        // we can grab these from an image OR use typical width & height of rectangle
   }
   
   private void CreateBody(BodyType bType)
   {
-    //This is the scalar size of the box that we're going to create
-    // we can grab these from an image OR use typical width & height of rectangle
-    int imgH = _img.height;
-    int imgW = _img.width;
-    
     
     //Here we create the shape by FIRST converting the scalar size of our image
     // to box2d's WORLD size. We divide by 2 because our x,y coordinate are located
     // in the center of the image. After we have the dimensions in box2d coordinates
     // we define the shape's size by using setAsBox()
     PolygonShape sd = new PolygonShape();
-    float box2dW = box2d.scalarPixelsToWorld(imgW/2);
-    float box2dH = box2d.scalarPixelsToWorld(imgH/2);
+    float box2dW = box2d.scalarPixelsToWorld(_imgW/2);
+    float box2dH = box2d.scalarPixelsToWorld(_imgH/2);
     sd.setAsBox(box2dW, box2dH);
     
 
@@ -54,7 +56,7 @@ class Entity
     // Parameters that affect physics check more info link for more detail
     fd.density = 1;
     fd.friction = 0.3;
-    fd.restitution = 0;
+    fd.restitution = 0.1;
 
     //BodyDefs are a body definition holds all the data needed to construct a rigid body. 
     // You can safely re-use body definitions. Shapes are added to a body after construction.
@@ -62,6 +64,7 @@ class Entity
     //Define the body and make it from the shape
     BodyDef bd = new BodyDef();
     bd.type = bType;
+    bd.fixedRotation = true;
     
     
     //This is where we set the initial position of the _body (entity)
@@ -69,6 +72,7 @@ class Entity
 
     _body = box2d.createBody(bd);
     _body.createFixture(fd);
+
   }
   
   public void Draw()
@@ -82,13 +86,13 @@ class Entity
 
     imageMode(CENTER);
     pushMatrix();
-    translate(pos.x, pos.y);
+    translate(pos.x, pos.y);   //print(" ( ", pos.x, " , ", pos.y, " ) ");
     rotate(-a);
     image(_img, 0, 0);     //We draw it at 0,0 because we've already TRANSLATED to the correct
     popMatrix();                 // x,y using the translate function and x,y returned from box2d
   }
   
-  private void CleanUpDeadObject()
+  void CleanUpDeadObject()
   {
     box2d.destroyBody(_body);
     //This object can now be safely deleted from an ArrayList
@@ -104,5 +108,8 @@ class Entity
   void    SetPosition(float x, float y) { }
   
   String  GetType() { return _type; }
+  float   GetX() { return _x; }
+  int     GetWidth() { return  _imgW; }
+  Body    GetBody() { return  _body; }
   
 }

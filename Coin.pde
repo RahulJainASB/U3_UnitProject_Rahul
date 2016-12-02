@@ -98,6 +98,8 @@ class Coin {
     // Attach fixture to body
     body.createFixture(fd);
 
+    body.setUserData(this);
+
     body.setAngularVelocity(random(-10, 10));
   }
 }
