@@ -25,14 +25,11 @@ class Mario extends Entity
     float G = 4000; // Strength of force
     if ( direction == true)
     {
-      //print(": Right ;; ");
-      //Vec2 force = new Vec2( 5000000, 100000);
       Vec2 force = new Vec2( G, 0);
       super._body.applyForce(force, super._body.getWorldCenter());
     }
-    else {
-      //print(": Left ;; ");
-      //Vec2 force = new Vec2( -1*G, 0);
+    else 
+    {
       Vec2 force = new Vec2( -1 * G, 0);
       super._body.applyForce(force, super._body.getWorldCenter());
     }
@@ -42,12 +39,11 @@ class Mario extends Entity
   {
     if ( direction == true)
     {
-      //print(": Up  ||  ");
+
       float G = 120000; // Strength of force 
       Vec2 force = new Vec2(0, G);
       super._body.applyForce(force, super._body.getWorldCenter());
     } else {
-      //print(": Down || ");
       float G = -100000; // Strength of force 
       Vec2 force = new Vec2(0, G);
       super._body.applyForce(force, super._body.getWorldCenter());

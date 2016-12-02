@@ -94,7 +94,6 @@ void draw() {
 
 
 void keyPressed() {
-  //print("Inside keyPressed");
 
   if ( key == CODED) {                  // check if key is CODED. This is for special keys
     if ( keyCode == LEFT ) {            // if left key is pressed, move left
@@ -118,7 +117,6 @@ void keyPressed() {
 
 // Collision event functions!
 void beginContact(Contact cp) {
-  //print("\n Inside begin Contact \n");
 
 
   // Get both shapes
@@ -135,7 +133,6 @@ void beginContact(Contact cp) {
 
   // Mario hits the coin
   if (o1.getClass() == Mario.class && o2.getClass() == Coin.class) {
-    print("Mario hits the coin\n");
     scoreboard.score++;
     Coin p2 = (Coin) o2;
     p2.delete();
@@ -145,20 +142,17 @@ void beginContact(Contact cp) {
   // Mario hits a wall
   if ( (o1.getClass() == Mario.class    && o2.getClass() == Boundary.class) ||
     (o1.getClass() == Boundary.class && o2.getClass() == Mario.class   ) ) {
-    print("Mario hits the boundary\n");
     scoreboard.lives--;
   }
 
 
   // Mario hits Goomba
   if ( (o1.getClass() == Mario.class  && o2.getClass() == Goomba.class)  ) {
-    print("Mario hits the Goomba\n");
     scoreboard.lives--;    
     Goomba g = (Goomba) o2;
     g.delete();
   }
   if (  (o1.getClass() == Goomba.class && o2.getClass() == Mario.class ) ) {
-    print("Mario hits the Goomba\n");
     scoreboard.lives--;    
     Goomba g = (Goomba) o1;
     g.delete();
@@ -166,12 +160,10 @@ void beginContact(Contact cp) {
 
   // Coin hits the wall
   if (o1.getClass() == Coin.class && o2.getClass() == Boundary.class) {
-    print("Coin hits the boundary\n");
     Coin p1 = (Coin) o1;
     p1.delete();
   }
   if (o1.getClass() == Boundary.class && o2.getClass() == Coin.class) {
-    print("Coin hits the boundary\n");
     Coin p1 = (Coin) o2;
     p1.delete();
   }

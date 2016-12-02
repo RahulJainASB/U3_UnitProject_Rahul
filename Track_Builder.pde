@@ -76,7 +76,6 @@ class Track_Builder {
     goomba.GetBody().setLinearVelocity(new Vec2(onTrack.x_speed, 0));  // Speed of moving the tracks
 
     goombas.add(goomba);
-    //print("Added Goomba\n");
   }
 
 
