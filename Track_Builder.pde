@@ -6,11 +6,8 @@
 class Track_Builder {
 
   // A boundary is a simple rectangle with x,y,width,and height, It moves to the left at constant velocity
-  float track_height;
-
-  //  PImage               img;
+  float                track_height;
   PImage               goombaImg;
-
   ArrayList<Track>     tracks;
   ArrayList<Goomba>    goombas;         // An ArrayList
 
@@ -22,11 +19,11 @@ class Track_Builder {
     track_height    =  40;
 
     // Create 3 tracks to begin with. Rest will be added dynamically
-    tracks.add(new Track(  width/4, height-25, (width/2), track_height));
+    tracks.add(new Track(  width/4, height-25, (width/2),     track_height));
     tracks.add(new Track(  3*(width/4), height-75, (width/4), track_height));
     tracks.add(new Track(  5*(width/4), height-30, (width/2), track_height));
 
-    //addGoomba(tracks.get(0));
+    //addGoomba(tracks.get(0));      // Don't add Goomba to 1st two tracks
     //addGoomba(tracks.get(1));
     addGoomba(tracks.get(2));
   }
@@ -80,17 +77,6 @@ class Track_Builder {
 
     goombas.add(goomba);
     //print("Added Goomba\n");
-
-
-    // Add Goomba to every one in 5 tracks randomly
-    //float createGoomba = random (100);
-    //if( createGoomba < 20 ) {
-    //{
-    // Create Goomba
-
-    //Goomba goomba = new Goomba( x_ + (w_/2), y_ + track_height, goombaImg, true);
-    //newTrack.addGoomba();
-    //}
   }
 
 

@@ -1,7 +1,3 @@
-// The Nature of Code
-// Daniel Shiffman
-// http://natureofcode.com
-
 // A fixed boundary class
 
 class Boundary {
@@ -49,4 +45,4 @@ class Boundary {
     rect(x,y,w,h);
   }
 
-}
+} // end of Class

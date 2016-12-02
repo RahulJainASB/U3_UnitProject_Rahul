@@ -2,12 +2,6 @@
 // Draws the coins
 
 
-// The Nature of Code
-// Daniel Shiffman
-// http://natureofcode.com
-
-// A circular particle
-
 class Coin {
 
   // We need to keep track of a Body and a radius
@@ -52,7 +46,8 @@ class Coin {
     }
     return false;
   }
-  // 
+
+  // Draw 
   void display() {
     // We look at each body and get its screen position
     Vec2 pos = box2d.getBodyPixelCoord(body);
@@ -61,17 +56,8 @@ class Coin {
     pushMatrix();
     translate(pos.x, pos.y);
     rotate(a);
-   imageMode(CENTER);
-     image(goldCoinImg, 0, 0, 40, 40);     //We draw it at 0,0 because we've already TRANSLATED to the correct
-    /*
-    fill(col);
-    stroke(0);
-    strokeWeight(1);
-    ellipse(0, 0, r*2, r*2);
-    // Let's add a line so we can see the rotation
-    line(0, 0, r, 0);
-    */
-    
+    imageMode(CENTER);
+    image(goldCoinImg, 0, 0, 40, 40);     //We draw it at 0,0 because we've already TRANSLATED to the correct
     popMatrix();
   }
 

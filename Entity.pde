@@ -64,7 +64,7 @@ class Entity
     //Define the body and make it from the shape
     BodyDef bd = new BodyDef();
     bd.type = bType;
-    bd.fixedRotation = true;
+    bd.fixedRotation = true;        // Set rotation to fixed i.e. no rotation
     
     
     //This is where we set the initial position of the _body (entity)
