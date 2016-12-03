@@ -8,19 +8,19 @@ class Entity
   private String   _type;
   private boolean  _isActive;
   private Body     _body;
-
+  
   Entity()
   {
     _x = 0;
     _y = 0;
     _imgH = 0;
     _imgW = 0;
-
+    
     _img  = null;
     _type = "Unknown Entity"; 
     _isActive = false;
   }
-
+  
   Entity(float x, float y, PImage img, String type, boolean isActive)
   {
     _x = x;
@@ -31,10 +31,10 @@ class Entity
     _imgH = _img.height;        //This is the scalar size of the box that we're going to create
     _imgW = _img.width;        // we can grab these from an image OR use typical width & height of rectangle
   }
-
+  
   private void CreateBody(BodyType bType)
   {
-
+    
     //Here we create the shape by FIRST converting the scalar size of our image
     // to box2d's WORLD size. We divide by 2 because our x,y coordinate are located
     // in the center of the image. After we have the dimensions in box2d coordinates
@@ -43,13 +43,13 @@ class Entity
     float box2dW = box2d.scalarPixelsToWorld(_imgW/2);
     float box2dH = box2d.scalarPixelsToWorld(_imgH/2);
     sd.setAsBox(box2dW, box2dH);
-
+    
 
     //Fixtures are used to describe the size, shape, and material properties of an object in the 
     // physics scene. One body can have multiple fixtures attached to it, and the center of mass 
     // of the body will be affected by the arrangement of its fixtures.
     // More info: http://www.iforce2d.net/b2dtut/fixtures  (Code is in C++ but should be readable)
-
+    
     //Define a fixture
     FixtureDef fd = new FixtureDef();
     fd.shape = sd;
@@ -65,15 +65,16 @@ class Entity
     BodyDef bd = new BodyDef();
     bd.type = bType;
     bd.fixedRotation = true;        // Set rotation to fixed i.e. no rotation
-
-
+    
+    
     //This is where we set the initial position of the _body (entity)
     bd.position.set(box2d.coordPixelsToWorld(_x, _y));
 
     _body = box2d.createBody(bd);
     _body.createFixture(fd);
-  }
 
+  }
+  
   public void Draw()
   {
     //First we get the position of where the body is. This function will return a PVector data type. 
@@ -85,12 +86,13 @@ class Entity
 
     imageMode(CENTER);
     pushMatrix();
-    translate(pos.x, pos.y); 
+    translate(pos.x, pos.y);   //print(" ( ", pos.x, " , ", pos.y, " ) ");
+    _x = pos.x;  _y = pos.y;
     rotate(-a);
     image(_img, 0, 0);     //We draw it at 0,0 because we've already TRANSLATED to the correct
     popMatrix();                 // x,y using the translate function and x,y returned from box2d
   }
-
+  
   void CleanUpDeadObject()
   {
     box2d.destroyBody(_body);
@@ -99,32 +101,16 @@ class Entity
 
 
 
-  boolean GetActive() { 
-    return _isActive;
-  }
-  void    SetActive(boolean state) { 
-    _isActive = state;
-  }
-
-  Vec2    GetPosition() { 
-    return box2d.getBodyPixelCoord(_body);
-  }
-  Vec2    GetWorldCenter() { 
-    return _body.getWorldCenter();
-  } 
-  void    SetPosition(float x, float y) {
-  }
-
-  String  GetType() { 
-    return _type;
-  }
-  float   GetX() { 
-    return _x;
-  }
-  int     GetWidth() { 
-    return  _imgW;
-  }
-  Body    GetBody() { 
-    return  _body;
-  }
+  boolean GetActive() { return _isActive; }
+  void    SetActive(boolean state) { _isActive = state; }
+  
+  Vec2    GetPosition()    { return box2d.getBodyPixelCoord(_body); }
+  Vec2    GetWorldCenter() { return _body.getWorldCenter(); } 
+  void    SetPosition(float x, float y) { }
+  
+  String  GetType() { return _type; }
+  float   GetX() { return _x; }
+  int     GetWidth() { return  _imgW; }
+  Body    GetBody() { return  _body; }
+  
 }

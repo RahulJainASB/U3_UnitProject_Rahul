@@ -1,7 +1,6 @@
 // A track class that moves to the left with time
 
-class Track 
-{
+class Track {
 
   // A boundary is a simple rectangle with x,y,width,and height, It moves to the left at constant velocity
   float x;
@@ -14,12 +13,13 @@ class Track
   // But we also have to make a body for box2d to know about it
   Body b;
 
-  Track(float x_,float y_, float w_, float h_) 
-  {
+  Track(float x_,float y_, float w_, float h_) {
     x = x_;
     y = y_;
     w = w_;
     h = h_;
+    x_speed = -5;                    // Speed of moving the tracks
+
     
     //int image_num = (int) random(1,5);
     //String s = "Ground_" + image_num + ".png";
@@ -29,7 +29,6 @@ class Track
     //h = img.height;
     
     
-    x_speed = -5;                    // Speed of moving the tracks
 
     // Define the polygon
     PolygonShape sd = new PolygonShape();
@@ -74,5 +73,6 @@ class Track
   
   float getLeftX()  { return (x-(w/2)); }
   float getRightX() { return (x+(w/2)); }
+  float getX()      { return x;         }
 
 }

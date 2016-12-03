@@ -43,10 +43,10 @@ class Track_Builder {
     }
 
     for (Goomba g : goombas) {      // Show the Goomba!
-      //if( ((g.GetX() - (g.GetWidth()/2)) <= width) && ((g.GetX() + (g.GetWidth()/2)) > 0) ) {
-      //print("Showing Goomba  ");
+      float speed = g.SetSpeed();    // Sets new speed and returns the value
+      g.GetBody().setLinearVelocity(new Vec2( speed, 0));
+      
       g.Draw();
-      //}
     }
   }
 
@@ -73,10 +73,8 @@ class Track_Builder {
   void addGoomba(Track onTrack) {
     PImage img = loadImage("Goomba_s.png");
 
-    Goomba goomba = new Goomba( onTrack.x, (onTrack.y - (onTrack.h/2)), img, true);
-
-    goomba.GetBody().setLinearVelocity(new Vec2(onTrack.x_speed, 0));  // Speed of moving the tracks
-
+    Goomba goomba = new Goomba( onTrack.x, (onTrack.y - (onTrack.h/2)), img, true, onTrack);
+    goomba.GetBody().setLinearVelocity(new Vec2(goomba.x_speed, 0));  // Speed of moving the tracks
     goombas.add(goomba);
     //print("Added Goomba\n");
   }

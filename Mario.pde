@@ -1,10 +1,10 @@
 class Mario extends Entity
 {
-  //  private boolean _keyLeft;
-  //  private boolean _keyRight;
-  //  private boolean _keyJump;
+//  private boolean _keyLeft;
+//  private boolean _keyRight;
+//  private boolean _keyJump;
   private PVector _moveSpeed;
-  //  private int     _jumpStrength;
+//  private int     _jumpStrength;
 
   Mario(float x, float y, PImage img, boolean isActive)
   {
@@ -13,9 +13,9 @@ class Mario extends Entity
     _moveSpeed = new PVector(50, 0);
 
     super._body.setUserData(this);
-
+    
     //This is not a great method of doing jumping
-    //    _jumpStrength = 20000;
+//    _jumpStrength = 20000;
     // but it works for now.
   }
 
@@ -25,10 +25,14 @@ class Mario extends Entity
     float G = 4000; // Strength of force
     if ( direction == true)
     {
+      //print(": Right ;; ");
+      //Vec2 force = new Vec2( 5000000, 100000);
       Vec2 force = new Vec2( G, 0);
       super._body.applyForce(force, super._body.getWorldCenter());
-    } else 
-    {
+    }
+    else {
+      //print(": Left ;; ");
+      //Vec2 force = new Vec2( -1*G, 0);
       Vec2 force = new Vec2( -1 * G, 0);
       super._body.applyForce(force, super._body.getWorldCenter());
     }
@@ -38,11 +42,12 @@ class Mario extends Entity
   {
     if ( direction == true)
     {
-
+      //print(": Up  ||  ");
       float G = 120000; // Strength of force 
       Vec2 force = new Vec2(0, G);
       super._body.applyForce(force, super._body.getWorldCenter());
     } else {
+      //print(": Down || ");
       float G = -100000; // Strength of force 
       Vec2 force = new Vec2(0, G);
       super._body.applyForce(force, super._body.getWorldCenter());
