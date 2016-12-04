@@ -36,7 +36,7 @@ class Scoreboard
   {
     _score     = 0;
     _level     = 1;
-    _lives     = 3;
+    _lives     = 10;
     _numCoinsHit  = 0;
   }
 
