@@ -47,7 +47,7 @@ class Scoreboard
   
   int getScore()
   {
-    _score = _numCoinsHit + (track_builder.numTracksCrossed * 5 * _level);
+    _score = _numCoinsHit + (track_builder._numTracksCrossed * 5 * _level);
     updateLevel();
     return _score;
   }
@@ -58,4 +58,9 @@ class Scoreboard
   }
   
   void updateLives(int i ) { _lives = _lives + i; }
+  
+  int getLives()
+  {
+    return _lives;
+  }
 }

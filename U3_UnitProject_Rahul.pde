@@ -188,5 +188,15 @@ void beginContact(Contact cp) {
 }
 
 // Objects stop touching each other
-void endContact(Contact cp) {
+void endContact(Contact cp) 
+{
+}
+
+void showMessage()
+{
+  if ( scoreboard.getLives() <= 0 )
+  {
+    textSize(24);
+    text("Game Over", 75, 400);
+  }
 }
