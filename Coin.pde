@@ -5,42 +5,35 @@
 class Coin {
 
   // We need to keep track of a Body and a radius
-  Body body;
-  float r;
+  private Body      _body;
+  private float     _r;
+  private boolean   delete = false;
 
-  color col;
 
-  boolean delete = false;
-
-  Coin(float x, float y, float r_) {
-    r = r_;
+  Coin(float x, float y, float r) {
+    _r = r;
     // This function puts the particle in the Box2d world
     makeBody(x, y, r);
-    body.setUserData(this);
-    col = color(175);
+    _body.setUserData(this);
   }
 
   // This function removes the particle from the box2d world
   void killBody() {
-    box2d.destroyBody(body);
+    box2d.destroyBody(_body);
   }
 
   void delete() {
     delete = true;
   }
 
-  // Change color when hit
-  void change() {
-    col = color(255, 0, 0);
-  }
-
   // Is the particle ready for deletion?
   // Is the particle ready for deletion?
   boolean done() {
     // Let's find the screen position of the particle
-    Vec2 pos = box2d.getBodyPixelCoord(body);
+    Vec2 pos = box2d.getBodyPixelCoord(_body);
+    
     // Is it off the bottom of the screen?
-    if (pos.y > height+r*2 || delete) {
+    if (pos.y > (height+(_r*2)) || delete) {
       killBody();
       return true;
     }
@@ -50,9 +43,10 @@ class Coin {
   // Draw 
   void display() {
     // We look at each body and get its screen position
-    Vec2 pos = box2d.getBodyPixelCoord(body);
+    Vec2 pos = box2d.getBodyPixelCoord(_body);
+    
     // Get its angle of rotation
-    float a = body.getAngle();
+    float a = _body.getAngle();
     pushMatrix();
     translate(pos.x, pos.y);
     rotate(a);
@@ -68,7 +62,7 @@ class Coin {
     // Set its position
     bd.position = box2d.coordPixelsToWorld(x, y);
     bd.type = BodyType.DYNAMIC;
-    body = box2d.createBody(bd);
+    _body = box2d.createBody(bd);
 
     // Make the body's shape a circle
     CircleShape cs = new CircleShape();
@@ -82,10 +76,8 @@ class Coin {
     fd.restitution = 0.3;
 
     // Attach fixture to body
-    body.createFixture(fd);
-
-    body.setUserData(this);
-
-    body.setAngularVelocity(random(-10, 10));
+    _body.createFixture(fd);
+    _body.setUserData(this);
+    _body.setAngularVelocity(random(-10, 10));
   }
 }

@@ -35,7 +35,6 @@ PImage goldCoinImg;
 
 void setup() {
   size(1024, 720);
-  //size(1280, 900);
 
   // Initialize box2d physics and create the world
   box2d = new Box2DProcessing(this);
@@ -86,6 +85,7 @@ void draw() {
   for (int i = coins.size()-1; i >= 0; i--) {
     Coin p = coins.get(i);
     p.display();
+    
     // Coins that leave the screen, we delete them
     // (note they have to be deleted from both the box2d world and our list
     if (p.done()) {
@@ -110,8 +110,6 @@ void keyPressed() {
     } else if ( keyCode == DOWN ) {    // if down key is pressed, move down
       mario.applyVertForce(false);
     }
-  }
-  if (key == ' ') {
   }
   if (key == 'q') {
     exit();
@@ -154,13 +152,13 @@ void beginContact(Contact cp) {
   if ( (o1.getClass() == Mario.class    && o2.getClass() == Boundary.class) ) 
   {
     Boundary b = (Boundary) o2;
-    if( b.name.equals("Bottom") == true) {
-      scoreboard.lives--;
+    if( b.getName().equals("Bottom") == true) {
+      scoreboard.updateLives(-1);
     }
   } else if ( (o1.getClass() == Boundary.class && o2.getClass() == Mario.class   ) ) {
     Boundary b = (Boundary) o1;
-    if( b.name.equals("Bottom") == true) {
-      scoreboard.lives--;
+    if( b.getName().equals("Bottom") == true) {
+      scoreboard.updateLives(-1);
     }
   }
 
@@ -168,12 +166,12 @@ void beginContact(Contact cp) {
 
   // Mario hits Goomba
   if ( (o1.getClass() == Mario.class  && o2.getClass() == Goomba.class)  ) {
-    scoreboard.lives--;    
+    scoreboard.updateLives(-1);    
     Goomba g = (Goomba) o2;
     g.delete();
   }
   if (  (o1.getClass() == Goomba.class && o2.getClass() == Mario.class ) ) {
-    scoreboard.lives--;    
+    scoreboard.updateLives(-1);    
     Goomba g = (Goomba) o1;
     g.delete();
   }
@@ -191,12 +189,4 @@ void beginContact(Contact cp) {
 
 // Objects stop touching each other
 void endContact(Contact cp) {
-}
-
-// When the mouse is released
-void mouseReleased() {
-}
-
-// When the mouse is pressed we. . .
-void mousePressed() {
 }

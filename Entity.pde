@@ -113,6 +113,6 @@ class Entity
   float   GetY() { return _y; }
   int     GetWidth() { return  _imgW; }
   Body    GetBody() { return  _body; }
-  float getLeftX()  { return (_x-(_imgW/2)); }
-  float getRightX() { return (_x+(_imgW/2)); }
+  float   getLeftX()  { return (_x-(_imgW/2)); }
+  float   getRightX() { return (_x+(_imgW/2)); }
 }

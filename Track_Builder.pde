@@ -73,8 +73,8 @@ class Track_Builder {
   void addGoomba(Track onTrack) {
     PImage img = loadImage("Goomba_s.png");
 
-    Goomba goomba = new Goomba( onTrack.x, (onTrack.y - (onTrack.h/2)), img, true, onTrack);
-    goomba.GetBody().setLinearVelocity(new Vec2(goomba.x_speed, 0));  // Speed of moving the tracks
+    Goomba goomba = new Goomba( onTrack.getX(), (onTrack.getY() - (onTrack.getHeight()/2)), img, true, onTrack);
+    goomba.GetBody().setLinearVelocity(new Vec2(goomba.getSpeed(), 0));  // Speed of moving the tracks
     goombas.add(goomba);
     //print("Added Goomba\n");
   }
@@ -87,7 +87,7 @@ class Track_Builder {
     while (it.hasNext() ) {
       Track t = it.next();
       if ( t.getRightX() < 0 ) {
-        box2d.destroyBody(t.b);    //This object can now be safely deleted from an ArrayList
+        box2d.destroyBody(t.getBody());    //This object can now be safely deleted from an ArrayList
         it.remove();
         numTracksCrossed++;
       }
@@ -99,7 +99,7 @@ class Track_Builder {
     Iterator<Goomba> git = goombas.iterator();
     while (git.hasNext() ) {
       Goomba g = git.next();
-      if ( (g.GetX() < 0 ) || (g.delete == true)) {
+      if ( (g.GetX() < 0 ) || (g.getDeleteStatus() == true)) {
         g.CleanUpDeadObject();        // Removes from box2d
         git.remove();
       }
@@ -124,7 +124,7 @@ class Track_Builder {
   {
     float x_;
     int spacing = (int)random( 90.0, 150.0);      // Space betweeen two tracks
-    x_ = prev.x + (prev.w/2) + spacing + (new_width/2);  
+    x_ = prev.getX() + (prev.getWidth()/2) + spacing + (new_width/2);  
     return x_;
   }
 } //end of class 
