@@ -87,7 +87,7 @@ class Entity
     imageMode(CENTER);
     pushMatrix();
     translate(pos.x, pos.y);   //print(" ( ", pos.x, " , ", pos.y, " ) ");
-    _x = pos.x;  _y = pos.y;
+    _x = pos.x;  _y = pos.y;    // Store the Pixel coordinates
     rotate(-a);
     image(_img, 0, 0);     //We draw it at 0,0 because we've already TRANSLATED to the correct
     popMatrix();                 // x,y using the translate function and x,y returned from box2d
@@ -110,7 +110,9 @@ class Entity
   
   String  GetType() { return _type; }
   float   GetX() { return _x; }
+  float   GetY() { return _y; }
   int     GetWidth() { return  _imgW; }
   Body    GetBody() { return  _body; }
-  
+  float getLeftX()  { return (_x-(_imgW/2)); }
+  float getRightX() { return (_x+(_imgW/2)); }
 }

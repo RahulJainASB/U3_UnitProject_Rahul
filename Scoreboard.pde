@@ -22,8 +22,12 @@ class Scoreboard
     textSize(14);
     text("Level: ",    width-280, 25);
     text (level,       width-230, 25);
+    
     text("Score: ",    width-280, 50);
     text (getScore(),  width-230, 50);
+    
+    if( lives < 1 )
+      fill(255, 0, 0);
     text("Lives: ",    width-280, 75);
     text (lives,       width-230, 75);
   }

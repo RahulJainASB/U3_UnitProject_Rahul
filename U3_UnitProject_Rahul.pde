@@ -26,6 +26,7 @@ ArrayList<Coin>     coins;           // An ArrayList of coins that will fall on 
 Track_Builder  track_builder;
 Scoreboard  scoreboard;
 Mario mario;
+Sky   sky;
 
 //Images
 PImage playerImg;
@@ -33,7 +34,8 @@ PImage goldCoinImg;
 
 
 void setup() {
-  size(1024, 720);
+  //size(1024, 720);
+  size(1280, 900);
 
   // Initialize box2d physics and create the world
   box2d = new Box2DProcessing(this);
@@ -48,15 +50,16 @@ void setup() {
 
   // Add boundaries
   boundaries = new ArrayList<Boundary>();
-  boundaries.add(new Boundary(  width/2, height-5, width, 10));
-  boundaries.add(new Boundary(  width/2, 5, width, 10));       // Top wall
-  boundaries.add(new Boundary(  width-5, height/2, 10, height));  // Right wall
-  boundaries.add(new Boundary(  5, height/2, 10, height));  // Left wall
+  boundaries.add(new Boundary(  width/2, height-5, width, 10, "Bottom")); // Bottom wall
+  boundaries.add(new Boundary(  width/2, 5, width, 10, "Top"));       // Top wall
+  boundaries.add(new Boundary(  width-5, height/2, 10, height, "Right"));  // Right wall
+  boundaries.add(new Boundary(  5, height/2, 10, height, "Left"));  // Left wall
 
   track_builder = new Track_Builder();    // Build the Track Builder
   coins         = new ArrayList<Coin>();  
   mario         = new Mario(width/4, 200, playerImg, true);    
   scoreboard    = new Scoreboard();
+  sky           = new Sky();
 }
 
 
@@ -76,6 +79,7 @@ void draw() {
   }
 
   track_builder.display();              // Show the tracks and create more
+  sky.display();
   mario.Draw();                        // Show Mario
 
   // Show the coins
@@ -139,7 +143,7 @@ void beginContact(Contact cp) {
     Coin p2 = (Coin) o2;
     p2.delete();
   }
-  if (o1.getClass() == Coin.class && o2.getClass() == Mario.class) {
+  else if (o1.getClass() == Coin.class && o2.getClass() == Mario.class) {
     scoreboard.hitCoin();
     Coin p2 = (Coin) o1;
     p2.delete();
@@ -147,10 +151,19 @@ void beginContact(Contact cp) {
 
 
   // Mario hits a wall
-  if ( (o1.getClass() == Mario.class    && o2.getClass() == Boundary.class) ||
-    (o1.getClass() == Boundary.class && o2.getClass() == Mario.class   ) ) {
-    scoreboard.lives--;
+  if ( (o1.getClass() == Mario.class    && o2.getClass() == Boundary.class) ) 
+  {
+    Boundary b = (Boundary) o2;
+    if( b.name.equals("Bottom") == true) {
+      scoreboard.lives--;
+    }
+  } else if ( (o1.getClass() == Boundary.class && o2.getClass() == Mario.class   ) ) {
+    Boundary b = (Boundary) o1;
+    if( b.name.equals("Bottom") == true) {
+      scoreboard.lives--;
+    }
   }
+
 
 
   // Mario hits Goomba

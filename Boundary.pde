@@ -7,15 +7,17 @@ class Boundary {
   float y;
   float w;
   float h;
+  String   name;
   
   // But we also have to make a body for box2d to know about it
   Body b;
 
-  Boundary(float x_,float y_, float w_, float h_) {
+  Boundary(float x_,float y_, float w_, float h_, String type) {
     x = x_;
     y = y_;
     w = w_;
     h = h_;
+    name = type;
 
     // Define the polygon
     PolygonShape sd = new PolygonShape();

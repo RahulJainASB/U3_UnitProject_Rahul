@@ -42,10 +42,19 @@ class Mario extends Entity
   {
     if ( direction == true)
     {
-      //print(": Up  ||  ");
-      float G = 120000; // Strength of force 
-      Vec2 force = new Vec2(0, G);
-      super._body.applyForce(force, super._body.getWorldCenter());
+//      if( GetY() >= ((2*height)/3) )  // Apply upward force to jump up. If close to the top wall, do not apply force
+      {
+        /*
+        float G = 120000; // Strength of force 
+        if( GetY() < (height/2) ) {
+          G = map(GetY(), 0, (height/2), 0, 60000);
+        }*/
+        
+        float G = map(GetY(), 0, height, 0, 120000);
+        //print(": Up:  ", G, "  ; "); 
+        Vec2 force = new Vec2(0, G);
+        super._body.applyForce(force, super._body.getWorldCenter());
+      }
     } else {
       //print(": Down || ");
       float G = -100000; // Strength of force 

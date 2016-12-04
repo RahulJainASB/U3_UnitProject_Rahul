@@ -17,7 +17,7 @@ class Track_Builder {
     goombaImg       = loadImage("Goomba_s.png");
     tracks          = new ArrayList<Track>();
     goombas         = new ArrayList<Goomba>();
-    track_height    =  40;
+    track_height    =  50;
     numTracksCrossed = 0;
 
     // Create 3 tracks to begin with. Rest will be added dynamically
@@ -116,7 +116,7 @@ class Track_Builder {
   float getNewTrackY( Track prev)
   {
     float h_;
-    h_ = random( (height - 400), height );
+    h_ = random( (height - 400), (height-track_height) );
     return h_;
   }
 
