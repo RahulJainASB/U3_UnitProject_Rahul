@@ -34,8 +34,8 @@ PImage goldCoinImg;
 
 
 void setup() {
-  //size(1024, 720);
-  size(1280, 900);
+  size(1024, 720);
+  //size(1280, 900);
 
   // Initialize box2d physics and create the world
   box2d = new Box2DProcessing(this);
