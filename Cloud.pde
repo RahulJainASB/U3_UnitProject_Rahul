@@ -23,6 +23,15 @@ class Cloud {
     _imgW = cloudImg.width;        // we can grab these from an image OR use typical width & height of rectangle
     _img = cloudImg;
 
+  if( (_imgH > height ) || (_imgW > width) )
+  {
+    float aspectRatio = _imgW/_imgH;
+    int newH = height - 200;
+    int newW = (int)(aspectRatio * newH);
+    _imgW = newW;
+    _imgH = newH;
+  }
+
 
     // Start in the center
     _x = width+_imgW - 10;
@@ -50,7 +59,7 @@ class Cloud {
     imageMode(CENTER);
     _x = _position.x;  
     _y = _position.y;    // Store the Pixel coordinates
-    image(_img, _x, _y);     //We draw it at 0,0 because we've already TRANSLATED to the correct
+    image(_img, _x, _y, _imgW, _imgH);     //We draw it at 0,0 because we've already TRANSLATED to the correct
   }
 
 
