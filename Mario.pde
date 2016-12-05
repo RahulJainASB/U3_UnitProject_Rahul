@@ -18,7 +18,7 @@ class Mario extends Entity
 
   void applyHorzForce(boolean direction)
   {
-    float G = 4000; // Strength of force
+    float G = 20000; // Strength of force
     if ( direction == true)
     {
       //print(": Right ;; ");

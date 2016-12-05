@@ -34,7 +34,7 @@ PImage goldCoinImg;
 
 
 void setup() {
-  size(1024, 720);
+  size(1024, 720, P2D);
 
   // Initialize box2d physics and create the world
   box2d = new Box2DProcessing(this);
@@ -78,8 +78,7 @@ void draw() {
     text("Game Over", 75, 400);
     String s = "Your score is:   " + scoreboard._score;
     text(s, 75, 500);
-  }
-  else
+  } else
   {
     // Code for running game
 

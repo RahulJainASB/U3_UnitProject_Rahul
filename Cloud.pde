@@ -17,7 +17,8 @@ class Cloud {
 
 
 
-  Cloud(PImage cloudImg) {
+  Cloud(PImage cloudImg) 
+  {
 
     _imgH = cloudImg.height;        //This is the scalar size of the box that we're going to create
     _imgW = cloudImg.width;        // we can grab these from an image OR use typical width & height of rectangle
