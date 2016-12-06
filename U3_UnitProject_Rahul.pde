@@ -15,6 +15,8 @@ import org.jbox2d.dynamics.joints.*;
 
 import java.util.Iterator;
 
+import ddf.minim.*;
+
 // A reference to our box2d world
 Box2DProcessing box2d;
 
@@ -31,6 +33,10 @@ Sky   sky;
 //Images
 PImage playerImg;
 PImage goldCoinImg;
+
+Minim minim;
+AudioSample coinCollision;
+
 
 
 void setup() {
@@ -59,6 +65,11 @@ void setup() {
   mario         = new Mario(width/4, 200, playerImg, true);    
   scoreboard    = new Scoreboard();
   sky           = new Sky();
+  
+  minim         = new Minim(this);
+//  water          = minim.loadSample("test.mp3", 2048);
+  coinCollision = minim.loadSample("Mario-Coin.mp3", 2048);
+
 }
 
 
@@ -153,10 +164,15 @@ void beginContact(Contact cp) {
     scoreboard.hitCoin();
     Coin p2 = (Coin) o2;
     p2.delete();
+    
+    coinCollision.trigger();
+    
   } else if (o1.getClass() == Coin.class && o2.getClass() == Mario.class) {
     scoreboard.hitCoin();
     Coin p2 = (Coin) o1;
     p2.delete();
+    
+    coinCollision.trigger();
   }
 
 
@@ -202,4 +218,11 @@ void beginContact(Contact cp) {
 // Objects stop touching each other
 void endContact(Contact cp) 
 {
+}
+
+void stop()
+{
+  coinCollision.close();
+  minim.stop();
+  super.stop();
 }
