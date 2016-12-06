@@ -36,7 +36,7 @@ class Scoreboard
   {
     _score     = 0;
     _level     = 1;
-    _lives     = 10;
+    _lives     = 1;
     _numCoinsHit  = 0;
   }
 
@@ -47,14 +47,17 @@ class Scoreboard
 
   int getScore()
   {
-    _score = _numCoinsHit + (track_builder._numTracksCrossed * 5 * _level);
-    updateLevel();
+    _score = _score + _numCoinsHit + (track_builder._numTracksCrossed * 5 * _level);
+    
+    updateLevel();  // Update the level based on new score
+    _numCoinsHit  = 0;  // Reset the coin count 
+    track_builder._numTracksCrossed = 0; // Reset the tracks crossed so only the tracks that pass from here on will be counted
     return _score;
   }
 
   void updateLevel()
   {
-    _level = 1 + ((int)(_score / 30));
+    _level = 1 + ((int)(_score / 50));
   }
 
   void updateLives(int i ) { 
