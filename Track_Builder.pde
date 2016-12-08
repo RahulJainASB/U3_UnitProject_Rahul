@@ -43,9 +43,12 @@ class Track_Builder {
     }
 
     for (Goomba g : _goombas) {      // Show the Goomba!
-      float speed = g.SetSpeed();    // Sets new speed and returns the value
-      g.GetBody().setLinearVelocity(new Vec2( speed, 0));
+      float xSpeed = g.setHorizontalSpeed();    // Sets new speed and returns the value
+      float ySpeed = g.setVerticalSpeed();    // Sets new speed and returns the value
       
+      //g.GetBody().setLinearVelocity(new Vec2( speed, 0));
+      g.GetBody().setLinearVelocity(new Vec2( xSpeed, ySpeed));
+           
       g.Draw();
     }
   }
@@ -74,7 +77,7 @@ class Track_Builder {
     PImage img = loadImage("Goomba_s.png");
 
     Goomba goomba = new Goomba( onTrack.getX(), (onTrack.getY() - (onTrack.getHeight()/2)), img, true, onTrack);
-    goomba.GetBody().setLinearVelocity(new Vec2(goomba.getSpeed(), 0));  // Speed of moving the tracks
+    goomba.GetBody().setLinearVelocity(new Vec2(goomba.getHorizontalSpeed(), goomba.getVerticalSpeed()));  // Speed of moving the tracks
     _goombas.add(goomba);
     //print("Added Goomba\n");
   }

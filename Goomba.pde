@@ -7,21 +7,25 @@ class Goomba extends Entity
   private boolean   _delete = false;
   private Track    _track;            // Track on which Goomba sits
   private float    _xSpeed;
+  private float    _ySpeed;
+  private int      _ySpeedFlipCounter = 20;
+  
 
   Goomba(float x, float y, PImage img, boolean isActive, Track t)
   {
     super(x, y, img, "Goomba", isActive);
     super.CreateBody(BodyType.KINEMATIC);  
     super._body.setUserData(this);
-    _track = t;
-    _xSpeed = t.getSpeed() * 2;
+    _track       = t;
+    _xSpeed      = t.getSpeed() * 2;
+    _ySpeed      = 5;
   }
 
   void delete() {
     _delete = true;
   }
   
-  float SetSpeed()
+  float setHorizontalSpeed()
   {
     if( _xSpeed < 0 )   // Traveling left
     { 
@@ -38,8 +42,22 @@ class Goomba extends Entity
     }
     return _xSpeed;
   }
+
   
-  float getSpeed() { return _xSpeed; }
-  boolean getDeleteStatus() { return _delete; }
+  float setVerticalSpeed()
+  {
+    _ySpeedFlipCounter--;
+    if ( _ySpeedFlipCounter <= 0) 
+    {
+      _ySpeed = -1 * _ySpeed;  // Flip the y Speed
+      _ySpeedFlipCounter = 20;
+    }
+    return _ySpeed;
+  }
+
+  
+  float getHorizontalSpeed() { return _xSpeed; }
+  float getVerticalSpeed()   { return _ySpeed; }
+  boolean getDeleteStatus()  { return _delete; }
   
 } // end of class
